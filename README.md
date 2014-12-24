@@ -10,6 +10,7 @@ Requirements
 2. Chrome / Chromium browser as its --app feature is extensively used.
 3. a centeral directory to keep reusable resources such as images marked in RESOURCES (optional to keep images there)
 4. a index.html to be placed as template in $BASE which will contain a #markdownfilename# which will be replaced with acutal markdown filename at setup time.
+5. python 2.7 is what is used to test this. if you are using python 3 then you need to modify python simplehttpserver command (2 places in whole script)
 
 SETUP
 =====
