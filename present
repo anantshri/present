@@ -1,0 +1,59 @@
+#!/bin/bash
+BASE="/base/presentation_resources/revealjs/"
+BROWSER="/usr/bin/Chromium"
+RESOURCES="/base/presentation_resources/resources/"
+DEF_NAME="presentation.md"
+echo "Present : Reveal.js Automation via Bash"
+echo "Created by: Anant Shrivastava"
+if [ $# -eq 0 ]
+then
+	python2 -m SimpleHTTPServer 9099 &
+	pid=$!
+	$BROWSER --app="http://localhost:9099/" --disable-gpu  --user-data-dir="/Users/anant/.profiles_chromium/presentor"
+	kill -KILL $pid
+elif [ $# -gt 0 ]
+then
+	if [ $1 == "setup" ]
+	then
+		if [ $# -gt 1 -a -f $2 ]
+		then
+			echo "setup for specific slide md file"
+			echo "File Name is "  $2
+			DEF_NAME=$2
+		else
+			echo "Invalid file name specified $2"
+			exit
+		fi
+		echo "Setting up presentation for this folder"
+		echo 
+		ln -s $BASE/reveal.js/ ./reveal.js
+		#cp -r $BASE/reveal.js/ ./reveal.js/
+		sed "s/#markdownfilename#/$DEF_NAME/g" $BASE/index.html > ./index.html
+		ln -s $RESOURCES ./resources
+	elif [ $1 == "clean" ]
+	then
+		echo "Lets clear everything then"
+		rm  resources
+		rm  reveal.js
+		rm  index.html
+	elif [ $1 == "print" ]
+	then
+		if [ -f "index.html" ]
+		then
+			python2 -m SimpleHTTPServer 9099 &
+			pid1=$!
+			$BROWSER --app="http://localhost:9099/index.html?print-pdf" --disable-gpu  --user-data-dir="/Users/anant/.profiles_chromium/presentor"
+			kill -KILL $pid1
+		else
+			echo "Index file not found please run present setup first"
+		fi
+	else
+		echo "Un identified argument"
+		echo "setup : setup reveal.js environment"
+		echo "setup slide_name.md : Setup environment keeping slide_name.md as external resource"
+		echo "clean : clear out all files"
+		echo "print : launches the browser in printing mode (do a control + P and save pdf )"
+		echo "when no argument is specified then present launches browser is presentation mode"
+	fi
+fi
+echo "Thanks for using present command"
