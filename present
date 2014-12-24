@@ -1,7 +1,6 @@
 #!/bin/bash
 BASE="/base/presentation_resources/revealjs/"
 BROWSER="/usr/bin/Chromium"
-RESOURCES="/base/presentation_resources/resources/"
 DEF_NAME="presentation.md"
 echo "Present : Reveal.js Automation via Bash"
 echo "Created by: Anant Shrivastava"
@@ -27,13 +26,10 @@ then
 		echo "Setting up presentation for this folder"
 		echo 
 		ln -s $BASE/reveal.js/ ./reveal.js
-		#cp -r $BASE/reveal.js/ ./reveal.js/
 		sed "s/#markdownfilename#/$DEF_NAME/g" $BASE/index.html > ./index.html
-		ln -s $RESOURCES ./resources
 	elif [ $1 == "clean" ]
 	then
 		echo "Lets clear everything then"
-		rm  resources
 		rm  reveal.js
 		rm  index.html
 	elif [ $1 == "print" ]
