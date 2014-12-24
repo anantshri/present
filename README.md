@@ -6,7 +6,7 @@ reveal.js + external markdown mixed with some bash awesomeness to automated rout
 Requirements
 ============
 
-1. a copy of reveal.js git repository from https://github.com/hakimel/reveal.js/ (Location to be marked as BASE) (it is asumed ath $BASE/reveal.js will contain git clone of reveal.js)
+1. a copy of reveal.js git repository from https://github.com/hakimel/reveal.js/ (Location to be marked as BASE) (it is assumed ath $BASE/reveal.js will contain git clone of reveal.js)
 2. Chrome / Chromium browser as its --app feature is extensively used.
 3. a centeral directory to keep reusable resources such as images marked in RESOURCES (optional to keep images there)
 4. a index.html to be placed as template in $BASE which will contain a #markdownfilename# which will be replaced with acutal markdown filename at setup time.
