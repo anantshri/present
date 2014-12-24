@@ -44,7 +44,7 @@ then
 			echo "Index file not found please run present setup first"
 		fi
 	else
-		echo "Un identified argument"
+		echo "Unidentified argument"
 		echo "setup : setup reveal.js environment"
 		echo "setup slide_name.md : Setup environment keeping slide_name.md as external resource"
 		echo "clean : clear out all files"
