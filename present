@@ -55,7 +55,7 @@ then
 			mkdir -p $BROWSER_PROFILE
 			cd $BASE
 			echo "git cloning the reveal.js repository"
-			git clone https://github.com/hakimel/reveal.js/
+			git clone --branch "3.0.0" https://github.com/hakimel/reveal.js/
 			mkdir $BASE_HTML
 			wget https://raw.githubusercontent.com/anantshri/automated_revealjs/master/index.html -O $BASE_HTML/index.html
 			wget https://raw.githubusercontent.com/anantshri/automated_revealjs/master/index_top.html -O $BASE_HTML/index_top.html
