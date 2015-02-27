@@ -1,18 +1,111 @@
 #!/bin/bash
-BASE="/base/presentation_resources/revealjs/"
-BROWSER="/usr/bin/Chromium"
-DEF_NAME="presentation.md"
 echo "Present : Reveal.js Automation via Bash"
 echo "Created by: Anant Shrivastava"
+CW=`pwd`
+BASE="$HOME/Work/Presentations/presentation_resources/reveal/"
+BASE_HTML=$BASE"/html"
+if [[ "$OSTYPE" == "darwin"* ]]
+then
+	if [ -f "/Applications/Chromium.app/Contents/MacOS/Chromium" ]
+	then
+		BROWSER="/Applications/Chromium.app/Contents/MacOS/Chromium"
+	elif [ -f "$HOME/Applications/Chromium.app/Contents/MacOS/Chromium" ]
+	then
+		BROWSER="$HOME/Applications/Chromium.app/Contents/MacOS/Chromium"
+	else
+		echo "Chromium browser was not found to be installed"
+		echo "Please install it to use this script properly" 
+		BROWSER="/Applications/Chromium.app/Contents/MacOS/Chromium"
+	fi
+else
+	if [ -f "/usr/bin/chromium-browser" ]
+	then
+		BROWSER="/usr/bin/chromium-browser"
+	else
+		echo "Chromium browser was not found to be installed"
+		echo "Please install it to use this script properly" 
+		BROWSER="/usr/bin/chromium-browser"
+	fi
+fi
+BROWSER_PROFILE="$HOME/.profiles_chromium/presentor"
+RESOURCES="$HOME/Work/Presentations/presentation_resources/resources/"
+MARKDOWN_MODULES="$HOME/Work/Presentations/presentation_resources/markdown_modules/"
+BASE_URL="https://github.com/anantshri/automated_revealjs/"
+DEF_NAME="presentation.md"
 if [ $# -eq 0 ]
 then
 	python2 -m SimpleHTTPServer 9099 &
 	pid=$!
-	$BROWSER --app="http://localhost:9099/" --disable-gpu  --user-data-dir="/Users/anant/.profiles_chromium/presentor"
+	$BROWSER --app="http://localhost:9099/" --disable-gpu  --user-data-dir="$BROWSER_PROFILE"
 	kill -KILL $pid
 elif [ $# -gt 0 ]
 then
-	if [ $1 == "setup" ]
+	if [ $1 == "init" -o $1 == "update" ]
+	then
+		echo "checking if base is upto date or not"
+		echo "if base is not present we will create directories at $BASE"
+		if [ -d $BASE/reveal.js ]
+		then
+			cd $BASE/reveal.js
+			git pull
+		else
+			mkdir -p $BASE
+			mkdir -p $MARKDOWN_MODULES
+			mkdir -p $RESOURCES
+			mkdir -p $BROWSER_PROFILE
+			cd $BASE
+			echo "git cloning the reveal.js repository"
+			git clone https://github.com/hakimel/reveal.js/
+			mkdir $BASE_HTML
+			wget https://raw.githubusercontent.com/anantshri/automated_revealjs/master/index.html -O $BASE_HTML/index.html
+			wget https://raw.githubusercontent.com/anantshri/automated_revealjs/master/index_top.html -O $BASE_HTML/index_top.html
+			wget https://raw.githubusercontent.com/anantshri/automated_revealjs/master/index_bottom.html -O $BASE_HTML/index_bottom.html
+			wget https://raw.githubusercontent.com/anantshri/automated_revealjs/master/powerpoint_style.css -O $BASE_HTML/powerpoint_style.css
+			echo "A sample html file is placed please change accordingly" 
+			#echo "Please place a templatized html file"
+			#echo "Sample template is available at $BASE_URL/blob/master/index.html"
+			pwd
+		fi
+	elif [ $1 == "require" ]
+	then
+		echo "setup via requirement files"
+		if [  -f $2 ]
+		then
+			inp=""
+			style=""
+			ln -s $MARKDOWN_MODULES ./markdown
+			template1='<section data-markdown="'
+			template2='" data-separator="\n---\n" data-separator-vertical="\n--\n" data-separator-notes="^Notes:"></section>'
+			while read p;
+			do
+			if [ -f $MARKDOWN_MODULES$p ]
+			then
+				inp="$inp $template1"markdown/"$p$template2"
+				#echo $inp
+			else
+				echo "$MARKDOWN_MODULES$p file not found : ignoring"
+			fi
+			done<$2
+			cat $BASE_HTML/powerpoint_style.css >> ./style.css
+			if [ -f style.css ]
+			then
+				style="<link rel='stylesheet' href='style.css'/>"
+			fi
+			#custom style
+			cat $BASE_HTML/index_top.html > ./index.html
+			echo $style >> ./index.html
+			echo "</head><body><div class='reveal'><div class='slides'>" >> ./index.html
+			ln -s $BASE/reveal.js/ ./reveal.js
+			#mkdir reveal.js
+			#cp -r $BASE/reveal.js/ ./reveal.js/
+			echo $inp >> ./index.html
+			cat $BASE_HTML/index_bottom.html >> ./index.html
+			ln -s $RESOURCES ./resources
+
+		else
+			echo "Please specify existing requirement file"
+		fi
+	elif [ $1 == "setup" ]
 	then
 		if [ $# -gt 1 -a -f $2 ]
 		then
@@ -25,31 +118,60 @@ then
 		fi
 		echo "Setting up presentation for this folder"
 		echo 
+		#mkdir reveal.js
+		#cp -r $BASE/reveal.js/ ./reveal.js/
 		ln -s $BASE/reveal.js/ ./reveal.js
-		sed "s/#markdownfilename#/$DEF_NAME/g" $BASE/index.html > ./index.html
+		#sed "s/#markdownfilename#/$DEF_NAME/g" $BASE_HTML/index.html > ./index.html
+		style=""
+		template1='<section data-markdown="'
+		template2='" data-separator="\n---\n" data-separator-vertical="\n--\n" data-separator-notes="^Notes:"></section>'
+		cat $BASE_HTML/powerpoint_style.css >> ./style.css
+		if [ -f style.css ]
+		then
+			style="<link rel='stylesheet' href='style.css'/>"
+		fi
+		#custom style
+		cat $BASE_HTML/index_top.html > ./index.html
+		echo $style >> ./index.html
+		echo "</head><body><div class='reveal'><div class='slides'>" >> ./index.html
+		echo $template1"$2"$template2 >> ./index.html
+		cat $BASE_HTML/index_bottom.html >> ./index.html
+		ln -s $RESOURCES ./resources
 	elif [ $1 == "clean" ]
 	then
 		echo "Lets clear everything then"
-		rm  reveal.js
-		rm  index.html
+		if [ -d "resources" ]
+		then
+			rm  resources
+		fi
+		if [ -d "markdown" ]
+		then
+			rm markdown
+		fi
+		if [ -d "reveal.js" ]
+		then
+			rm reveal.js
+		fi
+		if [ -f "index.html" ]
+		then
+			rm  index.html
+		fi
 	elif [ $1 == "print" ]
 	then
 		if [ -f "index.html" ]
 		then
 			python2 -m SimpleHTTPServer 9099 &
 			pid1=$!
-			$BROWSER --app="http://localhost:9099/index.html?print-pdf" --disable-gpu  --user-data-dir="/Users/anant/.profiles_chromium/presentor"
+			$BROWSER --app="http://localhost:9099/index.html?print-pdf" --disable-gpu  --user-data-dir="$BROWSER_PROFILE"
 			kill -KILL $pid1
 		else
 			echo "Index file not found please run present setup first"
 		fi
 	else
-		echo "Unidentified argument"
+		echo "Un-identified argument"
 		echo "setup : setup reveal.js environment"
-		echo "setup slide_name.md : Setup environment keeping slide_name.md as external resource"
+		echo "setup slide_name.md"
 		echo "clean : clear out all files"
-		echo "print : launches the browser in printing mode (do a control + P and save pdf )"
-		echo "when no argument is specified then present launches browser is presentation mode"
 	fi
 fi
-echo "Thanks for using present command"
+echo "Thanks for using present service"
