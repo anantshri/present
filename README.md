@@ -1,3 +1,13 @@
+Quick Setup
+===========
+
+<pre>
+wget https://raw.githubusercontent.com/anantshri/automated_revealjs/1.0/present -O ~/bin/present
+chmod 755 ~/bin/present
+~/bin/present init
+</pre>
+
+
 Automated Reveal.js
 ===================
 
