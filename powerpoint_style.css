@@ -15,12 +15,13 @@
 }*/
 .reveal h1, .reveal h2, .reveal h3, .reveal h4, .reveal h5, .reveal h6 {
 	text-align: center;
+/*	 enable this section to have background to the text as well as text shadow */
 /*	background-color: #FF0D03;
 	padding: 6px 0 6px 10px;
 	margin: 6px 0 6px 10px;
 	color: white;
-*/	text-shadow: 4px 4px #000000;
-}
+	text-shadow: 4px 4px #000000;
+*/}
 /*.reveal h1 { 
 	font-size: 3.21em; 
 }*/
