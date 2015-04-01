@@ -15,7 +15,11 @@
 }*/
 .reveal h1, .reveal h2, .reveal h3, .reveal h4, .reveal h5, .reveal h6 {
 	text-align: center;
-/*	 enable this section to have background to the text as well as text shadow */
+/*	Enable Below section for following feature
+	Title Background color
+	Title text color
+	Title text shadow
+*/
 /*	background-color: #FF0D03;
 	padding: 6px 0 6px 10px;
 	margin: 6px 0 6px 10px;
