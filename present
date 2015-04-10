@@ -1,6 +1,7 @@
 #!/bin/bash
 echo "Present : Reveal.js Workflow Automation"
 echo "Created by: Anant Shrivastava"
+RJSVER="3.0.0"
 CW=`pwd`
 BASE="$HOME/Work/Presentations/presentation_resources/reveal/"
 BASE_HTML=$BASE"/html"
@@ -46,8 +47,11 @@ then
 		echo "if base is not present we will create directories at $BASE"
 		if [ -d $BASE/reveal.js ]
 		then
-			cd $BASE/reveal.js
-			git pull
+			echo "Folder already exist"
+			echo "Reveal.js is fixed to specific version $RJSVER"
+			echo "More update features are not yet implemented"
+		#	cd $BASE/reveal.js
+		#	git pull
 		else
 			mkdir -p $BASE
 			mkdir -p $MARKDOWN_MODULES
@@ -55,7 +59,7 @@ then
 			mkdir -p $BROWSER_PROFILE
 			cd $BASE
 			echo "git cloning the reveal.js repository"
-			git clone --branch "3.0.0" https://github.com/hakimel/reveal.js/
+			git clone --branch $RJSVER https://github.com/hakimel/reveal.js/
 			mkdir $BASE_HTML
 			wget https://raw.githubusercontent.com/anantshri/present_revealjs_workflow_automation/master/index.html -O $BASE_HTML/index.html
 			wget https://raw.githubusercontent.com/anantshri/present_revealjs_workflow_automation/master/index_top.html -O $BASE_HTML/index_top.html
