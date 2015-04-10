@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>Present revealjs workflow automation by anantshri</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">Present revealjs workflow automation</h1>
+      <h2 class="project-tagline">A workflow automation tool for reveal.js</h2>
+      <a href="https://github.com/anantshri/present_revealjs_workflow_automation" class="btn">View on GitHub</a>
+      <a href="https://github.com/anantshri/present_revealjs_workflow_automation/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/anantshri/present_revealjs_workflow_automation/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
+
+    <section class="main-content">
+      <h1>
+<a id="quick-setup" class="anchor" href="#quick-setup" aria-hidden="true"><span class="octicon octicon-link"></span></a>Quick Setup</h1>
+
+<pre>
+wget https://raw.githubusercontent.com/anantshri/present_revealjs_workflow_automation/1.0/present -O ~/bin/present
+chmod 755 ~/bin/present
+~/bin/present init
+</pre>
+
+<h1>
+<a id="automated-revealjs" class="anchor" href="#automated-revealjs" aria-hidden="true"><span class="octicon octicon-link"></span></a>Automated Reveal.js</h1>
+
+<p>reveal.js + external markdown mixed with some bash awesomeness to automated routine presentation tasks</p>
+
+<h1>
+<a id="requirements" class="anchor" href="#requirements" aria-hidden="true"><span class="octicon octicon-link"></span></a>Requirements</h1>
+
+<ol>
+<li>a copy of reveal.js git repository from <a href="https://github.com/hakimel/reveal.js/">https://github.com/hakimel/reveal.js/</a> (Location to be marked as BASE) (it is assumed that $BASE/reveal.js will contain git clone of reveal.js)</li>
+<li>Chrome / Chromium browser as its --app feature is extensively used.</li>
+<li>a centeral directory to keep reusable resources such as images marked in RESOURCES (optional to keep images there)</li>
+<li>a index.html to be placed as template in $BASE which will contain a #markdownfilename# which will be replaced with acutal markdown filename at setup time.</li>
+<li>python 2.7 is what is used to test this. if you are using python 3 then you need to modify python simplehttpserver command (2 places in whole script)</li>
+</ol>
+
+<h1>
+<a id="setup" class="anchor" href="#setup" aria-hidden="true"><span class="octicon octicon-link"></span></a>SETUP</h1>
+
+<ol>
+<li><p>git clone the repository to some location in the system.</p></li>
+<li><p>modify the present script with proper location variables. (BASE, BROWSER, needs to be modified specifically as per environment)</p></li>
+<li><p>either place the git clone location into PATH or place present into path directory I prefer ~/bin/</p></li>
+<li><p>give execute permission to present script by chmod 755 present in the location.</p></li>
+</ol>
+
+<p>[steps above are written considering the person is well versed with commandline if you think details are need feel free to add and create a pull request]</p>
+
+<h1>
+<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span class="octicon octicon-link"></span></a>Usage</h1>
+
+<p>0) perform steps from SETUP section</p>
+
+<p>1) create a directory at any location on system</p>
+
+<p>2) create your markdown file. (slides are horizontally seperated by --- and vertical seperation is by -- )</p>
+
+<p>3) Once markdown file is created run following command</p>
+
+<p>4) present setup markdown.md (if presentation.md then this command is not needed)
+This step will do all the necesaary linking and place a index.html </p>
+
+<p>5) present
+This step will launch browser with proper parameters which you can just maximize. The usual slide notes and stuff all works by default as per the template.</p>
+
+<p>6) present print
+This step will launch browser with proper parameters to provide printing. All you need to do is ctrl + P and save as PDF.</p>
+
+<p>7) present clean
+This step will clean all the stuff that present setup performed.</p>
+
+<h1>
+<a id="disclaimer-" class="anchor" href="#disclaimer-" aria-hidden="true"><span class="octicon octicon-link"></span></a>Disclaimer </h1>
+
+<p>I have taken care as to not harm the computer by this code but if something happens i am not to be held responsible.</p>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/anantshri/present_revealjs_workflow_automation">Present revealjs workflow automation</a> is maintained by <a href="https://github.com/anantshri">anantshri</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+  
+  </body>
+</html>
+
