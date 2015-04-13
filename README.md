@@ -56,7 +56,10 @@ This step will launch browser with proper parameters which you can just maximize
 6) present print
 This step will launch browser with proper parameters to provide printing. All you need to do is ctrl + P and save as PDF.
 
-7) present clean
+7) present require
+This step will take a list of required markdown resources and will create a single presentation out of all those listed entries.
+
+8) present clean
 This step will clean all the stuff that present setup performed.
 
 
