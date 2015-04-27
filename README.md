@@ -29,18 +29,21 @@ Requirements
 4. a index.html to be placed as template in $BASE which will contain a #markdownfilename# which will be replaced with acutal markdown filename at setup time.
 5. python 2.7 is what is used to test this. if you are using python 3 then you need to modify python simplehttpserver command (2 places in whole script)
 
-SETUP
-=====
+Setup
+===========
 
-1. git clone the repository to some location in the system.
+<pre>
+wget https://raw.githubusercontent.com/anantshri/present_revealjs_workflow_automation/master/present -O $HOME/bin/present
+chmod 755 ~/bin/present
+~/bin/present init
+</pre>
 
-2. modify the present script with proper location variables. (BASE, BROWSER, needs to be modified specifically as per environment)
-
-3. either place the git clone location into PATH or place present into path directory I prefer ~/bin/
-
-4. give execute permission to present script by chmod 755 present in the location.
-
-[steps above are written considering the person is well versed with commandline if you think details are need feel free to add and create a pull request]
+For MacOSX folks or people who don't have wget try following
+<pre>
+curl "https://raw.githubusercontent.com/anantshri/present_revealjs_workflow_automation/master/present" -o $HOME/bin/present
+chmod 755 ~/bin/present
+~/bin/present init
+</pre>
 
 
 Usage
