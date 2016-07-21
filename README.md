@@ -2,14 +2,14 @@ Quick Setup
 ===========
 
 <pre>
-wget https://raw.githubusercontent.com/anantshri/present_revealjs_workflow_automation/master/present -O $HOME/bin/present
+wget https://raw.githubusercontent.com/anantshri/present/master/present -O $HOME/bin/present
 chmod 755 ~/bin/present
 ~/bin/present init
 </pre>
 
 For MacOSX folks if they don't have wget try following
 <pre>
-curl "https://raw.githubusercontent.com/anantshri/present_revealjs_workflow_automation/master/present" -o $HOME/bin/present
+curl "https://raw.githubusercontent.com/anantshri/present/master/present" -o $HOME/bin/present
 chmod 755 ~/bin/present
 ~/bin/present init
 </pre>
@@ -33,14 +33,14 @@ Setup
 ===========
 
 <pre>
-wget https://raw.githubusercontent.com/anantshri/present_revealjs_workflow_automation/master/present -O $HOME/bin/present
+wget https://raw.githubusercontent.com/anantshri/present/master/present -O $HOME/bin/present
 chmod 755 ~/bin/present
 ~/bin/present init
 </pre>
 
 For MacOSX folks or people who don't have wget try following
 <pre>
-curl "https://raw.githubusercontent.com/anantshri/present_revealjs_workflow_automation/master/present" -o $HOME/bin/present
+curl "https://raw.githubusercontent.com/anantshri/present/master/present" -o $HOME/bin/present
 chmod 755 ~/bin/present
 ~/bin/present init
 </pre>
