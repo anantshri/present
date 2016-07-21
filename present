@@ -55,7 +55,7 @@ BROWSER="$BROWSER"
 BROWSER_PROFILE="$HOME/.profiles_chromium/presentor"
 RESOURCES="$HOME/Work/Presentations/presentation_resources/resources/"
 MARKDOWN_MODULES="$HOME/Work/Presentations/presentation_resources/markdown_modules/"
-BASE_URL="https://github.com/anantshri/present_revealjs_workflow_automation/"
+BASE_URL="https://github.com/anantshri/present/"
 DEF_NAME="presentation.md"
 if [ $# -eq 0 ]
 then
